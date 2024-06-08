@@ -5,16 +5,17 @@ import ArticlePage from './pages/ArticlePage';
 import AboutPage from './pages/AboutPage';
 
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
+import NavigationBar from './NavigationBar';
 
 function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <h1>React blog</h1>
+        <NavigationBar />
         <div id='page-body'>
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/article" element={<ArticlePage />} />
+            <Route path="/articles" element={<ArticlePage />} />
             <Route path="/articles/:articleId" element={<ArticleListPage />} />
             <Route path="/about" element={<AboutPage />} />
           </Routes>
