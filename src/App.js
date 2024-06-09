@@ -6,6 +6,7 @@ import AboutPage from './pages/AboutPage';
 
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import NavigationBar from './NavigationBar';
+import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route path="/articles" element={<ArticleListPage />} />
             <Route path="/articles/:articleId" element={<ArticlePage />} />
             <Route path="/about" element={<AboutPage />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </div>
       </div>
