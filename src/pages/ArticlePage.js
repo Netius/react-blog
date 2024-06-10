@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import articles from "./article-content";
 import NotFoundPage from './NotFoundPage';
 import axios from 'axios';
+import CommentsList from '../components/CommentsList';
 
 const ArticlePage = () => {
 
@@ -17,10 +18,10 @@ const ArticlePage = () => {
 			setArticleInfo(newArticleInfo)
 		}
 		loadArticle();
-	},[]);
+	},[articleId]);
 
 
-	const article = articles.find(article => article.name == articleId);
+	const article = articles.find(article => article.name === articleId);
 
 	if(!article) return <NotFoundPage />;
 	
@@ -31,6 +32,8 @@ const ArticlePage = () => {
 			{article.content.map((paragraph,index) => (
 				<p key={index}>{paragraph}</p>
 			))}
+
+			<CommentsList comments={articleInfo.comments}/>
 		</>
 	)
 }
