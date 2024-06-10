@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import articles from "./article-content";
 import NotFoundPage from './NotFoundPage';
@@ -7,7 +7,7 @@ import CommentsList from '../components/CommentsList';
 
 const ArticlePage = () => {
 
-	const [articleInfo, setArticleInfo] = useState({upvote:0 , comments: []});
+	const [articleInfo, setArticleInfo] = useState({ upvote: 0, comments: [] });
 	const params = useParams();
 	const articleId = params.articleId; //Getting ID from each article
 
@@ -18,22 +18,31 @@ const ArticlePage = () => {
 			setArticleInfo(newArticleInfo)
 		}
 		loadArticle();
-	},[articleId]);
+	}, [articleId]);
 
+
+	const addUpVote = async () => {
+		const res = await axios.put(`/api/articles/${articleId}/upvote`);
+		const updatedArticle = res.data;
+		setArticleInfo(updatedArticle);
+	}
 
 	const article = articles.find(article => article.name === articleId);
 
-	if(!article) return <NotFoundPage />;
-	
+	if (!article) return <NotFoundPage />;
+
 	return (
 		<>
 			<h1>{article.title}</h1>
-			<p>This article has {articleInfo.upvote} upvote(s)</p>
-			{article.content.map((paragraph,index) => (
+			<div className='upvotes-section'>
+				<button onClick={addUpVote}>Upvote</button>
+				<p>This article has {articleInfo.upvote} upvote(s)</p>
+			</div>
+			{article.content.map((paragraph, index) => (
 				<p key={index}>{paragraph}</p>
 			))}
 
-			<CommentsList comments={articleInfo.comments}/>
+			<CommentsList comments={articleInfo.comments} />
 		</>
 	)
 }
