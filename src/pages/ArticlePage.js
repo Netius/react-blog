@@ -5,12 +5,15 @@ import NotFoundPage from './NotFoundPage';
 import axios from 'axios';
 import CommentsList from '../components/CommentsList';
 import AddCommentForm from '../components/AddCommentForm';
+import useUser from '../hooks/useUser.js';
 
 const ArticlePage = () => {
 
 	const [articleInfo, setArticleInfo] = useState({ upvote: 0, comments: [] });
 	const params = useParams();
 	const articleId = params.articleId; //Getting ID from each article
+
+	const { user, isLoading } = useUser();
 
 	useEffect(() => {
 		const loadArticle = async () => {
@@ -31,18 +34,23 @@ const ArticlePage = () => {
 	const article = articles.find(article => article.name === articleId);
 
 	if (!article) return <NotFoundPage />;
-
 	return (
 		<>
 			<h1>{article.title}</h1>
 			<div className='upvotes-section'>
-				<button onClick={addUpVote}>Upvote</button>
+				{user
+					? <button onClick={addUpVote}>Upvote</button>
+					: <button>Log in to upvote</button>
+				}
 				<p>This article has {articleInfo.upvote} upvote(s)</p>
 			</div>
 			{article.content.map((paragraph, index) => (
 				<p key={index}>{paragraph}</p>
 			))}
-			<AddCommentForm articleName={articleId} onArticleUpdated={updatedArticle => setArticleInfo(updatedArticle)} />
+			{user
+				? <AddCommentForm articleName={articleId} onArticleUpdated={updatedArticle => setArticleInfo(updatedArticle)} />
+				: <button>Log in to comment</button>
+			}
 			<CommentsList comments={articleInfo.comments} />
 		</>
 	)
