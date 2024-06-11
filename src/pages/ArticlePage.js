@@ -9,7 +9,8 @@ import useUser from '../hooks/useUser.js';
 
 const ArticlePage = () => {
 
-	const [articleInfo, setArticleInfo] = useState({ upvote: 0, comments: [] });
+	const [articleInfo, setArticleInfo] = useState({ upvote: 0, comments: [] , canUpvote: false});
+	const { canUpvote } = articleInfo;
 	const params = useParams();
 	const articleId = params.articleId; //Getting ID from each article
 
@@ -21,10 +22,12 @@ const ArticlePage = () => {
 			const headers = token ? {authtoken: token } : {};
 			const res = await axios.get(`/api/articles/${articleId}`, { headers});
 			const newArticleInfo = res.data;
-			setArticleInfo(newArticleInfo)
+			setArticleInfo(newArticleInfo);
 		}
-		loadArticle();
-	}, [articleId]);
+		if(!isLoading){
+			loadArticle();
+		}
+	}, [isLoading, user]);
 
 
 	const addUpVote = async () => {
@@ -43,7 +46,7 @@ const ArticlePage = () => {
 			<h1>{article.title}</h1>
 			<div className='upvotes-section'>
 				{user
-					? <button onClick={addUpVote}>Upvote</button>
+					? <button onClick={addUpVote}>{canUpvote ? 'Upvote' : 'Already upvoted'}</button>
 					: <button>Log in to upvote</button>
 				}
 				<p>This article has {articleInfo.upvote} upvote(s)</p>
