@@ -17,7 +17,9 @@ const ArticlePage = () => {
 
 	useEffect(() => {
 		const loadArticle = async () => {
-			const res = await axios.get(`/api/articles/${articleId}`);
+			const token = user && await user.getIdToken();
+			const headers = token ? {authtoken: token } : {};
+			const res = await axios.get(`/api/articles/${articleId}`, { headers});
 			const newArticleInfo = res.data;
 			setArticleInfo(newArticleInfo)
 		}
@@ -26,7 +28,9 @@ const ArticlePage = () => {
 
 
 	const addUpVote = async () => {
-		const res = await axios.put(`/api/articles/${articleId}/upvote`);
+		const token = user && await user.getIdToken();
+		const headers = token ? {authtoken: token } : {};
+		const res = await axios.put(`/api/articles/${articleId}/upvote`, null, {headers});
 		const updatedArticle = res.data;
 		setArticleInfo(updatedArticle);
 	}
