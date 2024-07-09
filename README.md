@@ -34,4 +34,4 @@ See the section about deployment for more information.
 
 ### `https://github.com/Netius/backend-react-blog`
 
-Connection to MongoDb and Firebase authentication is in the link above
+Connection to MongoDb and Firebase authentication is in the link https://github.com/Netius/backend-react-blog
