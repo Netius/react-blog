@@ -88,6 +88,11 @@ nav a:hover {
   color: white;
 }
 
+nav .active{
+  background: black;
+  color: white;
+}
+
 #page-body {
   max-width: 700px;
   margin: auto;
@@ -95,9 +100,13 @@ nav a:hover {
 }
 
 .article-list-item {
-  text-decoration: none;
+  /* text-decoration: none; */
   color: black;
   padding: 16px 0 0 0;
+}
+
+.article-list-item:hover {
+  color: blue;
 }
 
 .article-list-item p {
