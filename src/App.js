@@ -17,7 +17,7 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <NavigationBar />
-        <div id='page-body'>
+        <div className="container-md mt-5" id='page-body'>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/articles" element={<ArticleListPage />} />
