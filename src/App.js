@@ -7,7 +7,7 @@ import AboutPage from './pages/AboutPage';
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import NavigationBar from './NavigationBar';
 import NotFoundPage from './pages/NotFoundPage';
-import LoginPage from './pages/LoginPage';
+import LoginPage from './pages/LoginPage.tsx';
 import CreateAccountPage from './pages/CreateAccountPage';
 
 function App() {

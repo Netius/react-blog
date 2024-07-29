@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
-import articles from "./article-content";
+import articles from './article-content.tsx';
 import NotFoundPage from './NotFoundPage';
 import axios from 'axios';
 import CommentsList from '../components/CommentsList';
@@ -27,7 +27,7 @@ const ArticlePage = () => {
 		if(!isLoading){
 			loadArticle();
 		}
-	}, [isLoading, user]);
+	}, [isLoading, user, articleId]);
 
 
 	const addUpVote = async () => {
