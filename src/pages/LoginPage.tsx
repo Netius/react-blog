@@ -11,7 +11,8 @@ const LoginPage = () => {
 
 
 
-  const logIn = async () => {
+  const logIn = async (event) => {
+    event.preventDefault();
     try {
         await signInWithEmailAndPassword(getAuth(), email, password);
         navigate("/articles");
@@ -25,11 +26,20 @@ const LoginPage = () => {
   return (
     <>
       <h1>Log in</h1>
-      {error && <p className='error'>{error}</p>}
-      <input placeholder='Your email' value={email} onChange={e => setEmail(e.target.value)} />
-      <input type='password' placeholder='Your password' value={password} onChange={e => setPassword(e.target.value)} />
-      <button type='button' onClick={logIn}>Log in</button>
-      <Link to={"/create-account"}>Create a account here</Link>
+      <form onSubmit={logIn} className='mb-3'>
+        <div className="mb-3">
+          <label htmlFor="userEmail" className="form-label">Email address</label>
+          <input type='email' id='userEmail' className="form-control" required value={email} onChange={e => setEmail(e.target.value)} />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="userPassword" className="form-label">Password</label>
+          <input type='password' className="form-control" id="userPassword" required value={password} onChange={e => setPassword(e.target.value)} />
+        </div>
+        <button type="submit" className="btn btn-primary">Submit</button>
+      </form>
+      <Link className="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" to={"/create-account"}>Not registrered? Create a account here</Link>
+      {error && <div className="mt-4 alert alert-danger" role="alert">{error}</div>}
+
     </>
   )
 }
