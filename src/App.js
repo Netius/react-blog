@@ -1,11 +1,13 @@
-import './App.css';
+// import './App.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min";
 import HomePage from './pages/HomePage';
 import ArticleListPage from './pages/ArticleListPage';
 import ArticlePage from './pages/ArticlePage';
 import AboutPage from './pages/AboutPage';
 
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
-import NavigationBar from './NavigationBar';
+import NavigationBar from './NavigationBar.tsx';
 import NotFoundPage from './pages/NotFoundPage';
 import LoginPage from './pages/LoginPage.tsx';
 import CreateAccountPage from './pages/CreateAccountPage';
