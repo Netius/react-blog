@@ -2,6 +2,7 @@ import React from 'react'
 import { NavLink, useNavigate } from 'react-router-dom';
 import useUser from './hooks/useUser';
 import { getAuth, signOut } from 'firebase/auth';
+import { ReactComponent as Logo } from './logo.svg';
 
 const NavigationBar: React.FC = () => {
   const { user } = useUser();
@@ -10,7 +11,9 @@ const NavigationBar: React.FC = () => {
   return (
     <nav className="navbar bg-dark border-bottom navbar-expand-lg border-body" data-bs-theme="dark">
       <div className="container-fluid">
-        <NavLink className={"navbar-brand"} to={"/"}>React blog</NavLink>
+        <NavLink className={"navbar-brand"} to={"/"}>
+          <Logo className='App-logo' /> React blog 
+        </NavLink>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>

@@ -1,4 +1,4 @@
-// import './App.css';
+import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import HomePage from './pages/HomePage';
@@ -10,7 +10,7 @@ import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import NavigationBar from './NavigationBar.tsx';
 import NotFoundPage from './pages/NotFoundPage';
 import LoginPage from './pages/LoginPage.tsx';
-import CreateAccountPage from './pages/CreateAccountPage';
+import CreateAccountPage from './pages/CreateAccountPage.tsx';
 
 function App() {
   return (
