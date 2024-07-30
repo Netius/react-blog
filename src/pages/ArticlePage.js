@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import articles from './article-content.tsx';
 import NotFoundPage from './NotFoundPage';
 import axios from 'axios';
@@ -7,14 +7,16 @@ import CommentsList from '../components/CommentsList';
 import AddCommentForm from '../components/AddCommentForm';
 import useUser from '../hooks/useUser.js';
 
-const ArticlePage = () => {
 
+const ArticlePage = () => {
 	const [articleInfo, setArticleInfo] = useState({ upvote: 0, comments: [] , canUpvote: false});
 	const { canUpvote } = articleInfo;
 	const params = useParams();
 	const articleId = params.articleId; //Getting ID from each article
 
 	const { user, isLoading } = useUser();
+
+  const navigate = useNavigate();
 
 	useEffect(() => {
 		const loadArticle = async () => {
@@ -46,11 +48,14 @@ const ArticlePage = () => {
 			<h1 className='mb-0'>{article.title}</h1>
 			<div className='upvotes-section'>
 				{user
-					? <button className='btn btn-success' onClick={addUpVote}>{canUpvote ? 'Upvote' : 'Already upvoted'}</button>
+					?<>
+						<p>This article has <b>{articleInfo.upvote} upvote(s)</b></p>
+					 	<button className='btn btn-success mb-4' onClick={addUpVote}>{canUpvote ? 'Upvote' : 'Already upvoted'}</button>
+					 </>
 					: 
 					<div>
 						<p>This article has <b>{articleInfo.upvote} upvote(s)</b></p>
-						<button className='btn btn-info mb-4'>Log in to upvote</button>
+						<button onClick={() => navigate("/login")} className='btn btn-info mb-4'>Log in to upvote</button>
 					</div>
 				}
 				
@@ -60,7 +65,7 @@ const ArticlePage = () => {
 			))}
 			{user
 				? <AddCommentForm articleName={articleId} onArticleUpdated={updatedArticle => setArticleInfo(updatedArticle)} />
-				: <button className='btn btn-info mb-3'>Log in to comment</button>
+				: <button  onClick={() => navigate("/login")} className='btn btn-info mb-3'>Log in to comment</button>
 			}
 			<CommentsList comments={articleInfo.comments} />
 		</>
