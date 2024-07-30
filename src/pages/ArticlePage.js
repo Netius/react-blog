@@ -43,20 +43,24 @@ const ArticlePage = () => {
 	if (!article) return <NotFoundPage />;
 	return (
 		<>
-			<h1>{article.title}</h1>
+			<h1 className='mb-0'>{article.title}</h1>
 			<div className='upvotes-section'>
 				{user
-					? <button onClick={addUpVote}>{canUpvote ? 'Upvote' : 'Already upvoted'}</button>
-					: <button>Log in to upvote</button>
+					? <button className='btn btn-success' onClick={addUpVote}>{canUpvote ? 'Upvote' : 'Already upvoted'}</button>
+					: 
+					<div>
+						<p>This article has <b>{articleInfo.upvote} upvote(s)</b></p>
+						<button className='btn btn-info mb-4'>Log in to upvote</button>
+					</div>
 				}
-				<p>This article has {articleInfo.upvote} upvote(s)</p>
+				
 			</div>
 			{article.content.map((paragraph, index) => (
 				<p key={index}>{paragraph}</p>
 			))}
 			{user
 				? <AddCommentForm articleName={articleId} onArticleUpdated={updatedArticle => setArticleInfo(updatedArticle)} />
-				: <button>Log in to comment</button>
+				: <button className='btn btn-info mb-3'>Log in to comment</button>
 			}
 			<CommentsList comments={articleInfo.comments} />
 		</>
