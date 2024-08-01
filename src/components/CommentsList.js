@@ -3,19 +3,21 @@ import React from 'react'
 const CommentsList = ({ comments }) => {
   return (
     <>
-      {comments &&
-        <h3>Comments:</h3>
+      {comments.length > 0 &&
+        <h3>Comments</h3>
       }
-      <ul class="list-group">
+      <div class="row">
         {comments.map((comment, index) => {
           return (
-            <li class="list-group-item py-3" key={index}>
-              <h2 className='h4'>{comment.postedBy}</h2>
-              <p>{comment.text}</p>
-            </li>
+            <div class="card m-2 bg-light-subtle text-dark bg-opacity-10" style={{ width: '32%', padding: '50px' }} key={index}>
+              <div class="card-body">
+                <h5 class="card-title">{comment.postedBy}</h5>
+                <p class="card-text">{comment.text}</p>
+              </div>
+            </div>
           )
         })}
-      </ul>
+      </div>
     </>
   )
 }
