@@ -3,8 +3,9 @@ import React from 'react'
 const CommentsList = ({ comments }) => {
   return (
     <>
-      {comments.length > 0 &&
-        <h3>Comments</h3>
+      <h3>Comments</h3>
+      {comments.length === 0 &&
+        <div className='alert alert-warning mt-3'>No comments yet! Be the first to comment.</div>
       }
       <div class="row">
         {comments.map((comment, index) => {
